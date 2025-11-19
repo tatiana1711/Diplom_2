@@ -21,12 +21,16 @@ class TestUserUpdate:
         assert response_data["user"]["name"] == new_name
         delete_user(access_token)
 
-    @allure.title('Изменение данных пользователя без авторизации')
+    @allure.title('Ошибка изменения email без авторизации)')
     @allure.description('Попытка изменить данные пользователя без передачи токена авторизации. Ожидается ошибка 401')
-    def test_update_user_without_auth(self):
+    def test_update_user_without_auth_with_email(self):
         update_response = update_user_info("", {"email": "test@test.com"})
         assert update_response.status_code == 401
         assert "You should be authorised" in update_response.json()["message"]
+
+    @allure.title('Ошибка изменения имени без авторизации')
+    @allure.description('Попытка изменить данные пользователя без передачи токена авторизации. Ожидается ошибка 401')
+    def test_update_user_without_auth_with_name(self):
         update_response = update_user_info("", {"name": "NewName"})
         assert update_response.status_code == 401
         assert "You should be authorised" in update_response.json()["message"]

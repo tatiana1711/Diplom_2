@@ -3,9 +3,7 @@ import requests
 import allure
 import random
 import string
-
-
-BASE_URL ='https://stellarburgers.education-services.ru/api'
+from urls import *
 
 def generate_random_string(length):
     letters = string.ascii_lowercase
